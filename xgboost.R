@@ -1,5 +1,11 @@
 ###### XGBOOST
 
+library(tidyverse)
+library(tidymodels)
+library(lubridate)
+library(fitzRoy)
+theme_set(theme_bw())
+
 afl <- fetch_player_stats_fryzigg(season = 2015:2021) %>% 
   filter(match_round %in% as.character(1:23)) %>% 
   mutate(outcome = ifelse(match_winner == player_team, "win", "loss"),
