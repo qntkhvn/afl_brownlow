@@ -68,11 +68,13 @@ xg_fit_final <- xg_wf %>%
   fit(train)
 
 xg_pred <- xg_fit_final %>% 
-  augment(test)
-
-xg_pred %>% 
+  augment(test) %>% 
   select(contains("_name"), contains(".pred")) %>% 
   mutate(exp_votes = 0 * .pred_0 + 1 *.pred_1 + 2 * .pred_2 + 3 * .pred_3) %>% 
   group_by(player_first_name, player_last_name) %>% 
-  summarize(exp_total_votes = sum(exp_votes)) %>% 
-  arrange(-exp_total_votes)
+  summarize(predicted_votes = sum(exp_votes)) %>% 
+  arrange(-predicted_votes) %>% 
+  ungroup() %>% 
+  mutate(predicted_rank = row_number()) 
+
+ # write_csv(xg_pred, "predictions.csv")
