@@ -73,11 +73,10 @@ afl %>%
 afl %>% 
   mutate(
     position_group = case_when(
-      player_position %in% c("C", "RR", "R", "WL", "WR") ~ "midfield",
-      player_position %in% c("HBFR", "HBFL", "BPR", "CHB", "FB", "BPL") ~ "defense",
-      player_position %in% c("FF", "CHF", "HFFR", "HFFL", "FPL", "FPR") ~ "forward",
-      player_position == "RK" ~ "ruck",
-      player_position %in% c("INT", "SUB") ~ "bench",
+      player_position %in% c("C", "WL", "WR", "RR", "R", "RK") ~ "Midfielders",
+      player_position %in% c("HBFR", "HBFL", "BPR", "CHB", "FB", "BPL") ~ "Defenders",
+      player_position %in% c("FF", "CHF", "HFFR", "HFFL", "FPL", "FPR") ~ "Forwards",
+      player_position %in% c("INT", "SUB") ~ "Bench",
       TRUE ~ as.character(player_position)),
     voted = ifelse(brownlow_votes == 0, "no", "yes")) %>% 
   group_by(position_group) %>% 
