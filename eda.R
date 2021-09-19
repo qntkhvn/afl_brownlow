@@ -76,8 +76,7 @@ afl %>%
       player_position %in% c("C", "WL", "WR", "RR", "R", "RK") ~ "Midfielders",
       player_position %in% c("HBFR", "HBFL", "BPR", "CHB", "FB", "BPL") ~ "Defenders",
       player_position %in% c("FF", "CHF", "HFFR", "HFFL", "FPL", "FPR") ~ "Forwards",
-      player_position %in% c("INT", "SUB") ~ "Bench",
-      TRUE ~ as.character(player_position)),
+      player_position %in% c("INT", "SUB") ~ "Bench"),
     voted = ifelse(brownlow_votes == 0, "no", "yes")) %>% 
   group_by(position_group) %>% 
   summarize(pct_voted = sum(voted == "yes") / n()) %>% 
