@@ -70,7 +70,6 @@ afl %>%
   ggplot(aes(pct_voted, player_position)) +
   geom_col()
   
-
 afl %>% 
   mutate(
     position_group = case_when(
